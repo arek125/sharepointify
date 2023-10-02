@@ -1,0 +1,23 @@
+{
+    "extends": "@vue/tsconfig/tsconfig.json",
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "noImplicitAny": false,
+      "allowJs": true,
+      "baseUrl": "src",
+      "paths": {
+        "@/*": ["./*"]
+      },
+      "typeRoots": [
+        "./node_modules/@types"
+        // "./node_modules/vuetify/types"
+      ],
+      "types": ["vuetify"]
+    },
+    "allowSyntheticDefaultImports": true
+    // "include": ["./src/**/*.ts", "./src/**/*.d.ts", "./src/**/*.tsx", "./src/**/*.vue"] ,
+    // "exclude": [
+    //     "node_modules",
+    //     "**/*.spec.ts"
+    // ]
+}

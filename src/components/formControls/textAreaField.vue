@@ -1,0 +1,34 @@
+<script setup lang="ts">
+import type { columnInfoI } from '@/types'
+import type { PropType } from 'vue'
+import { ref } from 'vue'
+// import { useFormStore } from '@/stores/form'
+// const formStore = useFormStore()
+
+const props = defineProps({
+    colInfo: { type: Object as PropType<columnInfoI>, required: true},
+    rules: { type: Array as PropType<any[]> },
+    readonly: { type: Boolean, required: true },
+    //columnName: { type: String, required: true },
+    rows: { type: String, required: true, default: "3"},
+    value: String
+})
+//const colInfo = ref<columnInfoI | undefined>(formStore.getCol(props.columnName))
+const rules = ref([v => !!v || !props.colInfo.required || 'Required !'])
+if(props.rules)for(const fct of props.rules)rules.value.push(fct)
+const _value = ref(props.value)
+</script>
+
+<template>
+    <v-textarea
+        v-model="_value"
+        filled
+        :rows="props.rows"
+        :label="props.colInfo.label"
+        :required="props.colInfo.required"
+        :rules="props.rules"
+        :readonly="props.readonly"
+        :prepend-inner-icon="props.colInfo.required&&!_value?'mdi-alert-decagram-outline':undefined"
+        @input="$emit('input', _value)"
+    ></v-textarea>
+</template>
